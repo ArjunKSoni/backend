@@ -24,3 +24,5 @@ app.use('/api/auth',require('./routes/auth'))
 app.listen(port,()=>{
     console.log(`successfully loaded at ${port}`)
 })
+
+module.exports=app;
