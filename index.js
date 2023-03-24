@@ -6,12 +6,6 @@ require("./connect_mongo")
 
 // session creation   npm i express-session
 var session=require("express-session")
-app.set('trust proxy', 1) 
-app.use(session({
-  secret: 'xnksa9923ms/,;j0q2q9jsun883dsjakx',
-  resave: false,
-  saveUninitialized: false,
-}))
 
 app.use(cors())
 app.use(express.json())

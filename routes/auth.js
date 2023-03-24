@@ -1,7 +1,7 @@
 const express = require('express')
 const User = require('../models/Register')
 const router = express.Router()
-const bcrypt=require("bcrypt")
+
 
 router.post("/register", async (req, res) => {
   let newuser = new User({
@@ -10,8 +10,7 @@ router.post("/register", async (req, res) => {
     password: req.body.password,
     mobileNo: req.body.mobileNo,
   })
-  var salt = bcrypt.genSaltSync(10);
-  var hash = bcrypt.hashSync(newuser.password, salt);
+  var hash = await Buffer.from(newuser.password, 'utf8').toString('base64')
   const userN = await User.findOne({ user: newuser.user });
   const userE = await User.findOne({ email: newuser.email });
   if (userN || userE) {
@@ -36,8 +35,8 @@ router.post('/login', async (req, res) => {
     if (!olduser) {
       return res.status(400).json({ message: "User name not found", success: "failed" });
     }
-    const passwordCompare = await bcrypt.compare(password, olduser.password)
-    if (!passwordCompare) {
+    const passwordCompare =await Buffer.from(password, 'utf8').toString('base64')
+    if (passwordCompare!=olduser.password) {
       return res.status(400).json({ message: "invalid password", success: "fail" });
     }
     const payload = olduser._id
