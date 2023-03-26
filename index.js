@@ -13,7 +13,7 @@ app.use(express.json())
 app.use('/api/auth', require('./routes/auth'))
 // app.use('/api/store',require('./routes/store'))
 app.get("/", (req, res) => {
-    res.send("api is live")
+    res.send("api is live bro")
 })
 
 
