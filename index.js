@@ -1,7 +1,7 @@
-const express= require('express')
-const app=express()
+const express = require('express')
+const app = express()
 // var cors = require('cors')
-const port=3000
+const port = process.env.PORT || 3000
 require("./connect_mongo")
 
 // session creation   npm i express-session
@@ -10,16 +10,16 @@ require("./connect_mongo")
 // app.use(cors())
 app.use(express.json())
 // app.use(express.urlencoded({extended:true}))
-app.use('/api/auth',require('./routes/auth'))
+app.use('/api/auth', require('./routes/auth'))
 // app.use('/api/store',require('./routes/store'))
-app.get("/",(req,res)=>{
+app.get("/", (req, res) => {
     res.send("api is live")
 })
 
 
 
-app.listen(port,()=>{
+app.listen(port, () => {
     console.log(`successfully loaded at`)
 })
 
-module.exports=app;
+module.exports = app;
