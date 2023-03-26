@@ -17,7 +17,7 @@ router.post("/register", async (req, res) => {
     return res.json({ message: "User already exist", success: "fail" });
   }
   else {
-    newuser.password=hash
+    newuser.password = hash
     await newuser.save();
     newuser = await User.findOne({ user: newuser.user });
     const payload = newuser._id
@@ -28,15 +28,15 @@ router.post("/register", async (req, res) => {
 })
 
 router.post('/login', async (req, res) => {
-  const registereduser = req.body.user;
+  const registereduser = req.body.email;
   const password = req.body.password;
   try {
-    let olduser = await User.findOne({ user: registereduser });
+    let olduser = await User.findOne({ email: registereduser });
     if (!olduser) {
       return res.status(400).json({ message: "User name not found", success: "failed" });
     }
-    const passwordCompare =await Buffer.from(password, 'utf8').toString('base64')
-    if (passwordCompare!=olduser.password) {
+    const passwordCompare = await Buffer.from(password, 'utf8').toString('base64')
+    if (passwordCompare != olduser.password) {
       return res.status(400).json({ message: "invalid password", success: "fail" });
     }
     const payload = olduser._id

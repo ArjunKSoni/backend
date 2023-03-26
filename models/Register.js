@@ -1,21 +1,21 @@
-const mongoos =require('mongoose')
-const RegisterSchema=new mongoos.Schema({
-    user:{
-        type:String
+const mongoos = require('mongoose')
+const RegisterSchema = new mongoos.Schema({
+    user: {
+        type: String
     },
-    email:{
-        type:String,
-        required:true
+    email: {
+        type: String,
+        required: true
     },
-    password:{
-        type:String,
-        required:true,
+    password: {
+        type: String,
+        required: true,
     },
-    mobileNo:{
-        type:Number,
-        default: "general"
+    mobileNo: {
+        type: Number,
+        required: true,
     }
 })
-const Register=new mongoos.model("Register",RegisterSchema)
+const Register = new mongoos.model("Register", RegisterSchema)
 
-module.exports= Register;
+module.exports = Register;
