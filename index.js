@@ -1,13 +1,13 @@
 const express = require('express')
 const app = express()
-// var cors = require('cors')
+var cors = require('cors')
 const port = process.env.PORT || 3000
 require("./connect_mongo")
 
 // session creation   npm i express-session
 // var session=require("express-session")
 
-// app.use(cors())
+app.use(cors())
 app.use(express.json())
 // app.use(express.urlencoded({extended:true}))
 app.use('/api/auth', require('./routes/auth'))
