@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 
 
 app.listen(port, () => {
-    console.log(`successfully loaded at`)
+    console.log(`successfully loaded at ${port}`)
 })
 
 module.exports = app;
