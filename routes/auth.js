@@ -23,7 +23,7 @@ router.post("/register", async (req, res) => {
     const payload = newuser._id
     const authToken = await Buffer.from(payload, 'utf8').toString('base64') //creating json web token for payload
     newuser.token = authToken
-    return res.send({ authToken, message: "Account created successfully", success: "success" })
+    return res.send({ authToken, user: newuser.user, message: "Account created successfully", success: "success" })
   }
 })
 
@@ -33,7 +33,7 @@ router.post('/login', async (req, res) => {
   try {
     let olduser = await User.findOne({ email: registereduser });
     if (!olduser) {
-      return res.status(400).json({ message: "User name not found", success: "failed" });
+      return res.status(400).json({ message: "User name not found", success: "fail" });
     }
     const passwordCompare = await Buffer.from(password, 'utf8').toString('base64')
     if (passwordCompare != olduser.password) {
@@ -42,11 +42,11 @@ router.post('/login', async (req, res) => {
     const payload = olduser._id
     const authToken = await Buffer.from(payload, 'utf8').toString('base64') //creating json web token for payload
     olduser.token = authToken
-    return res.json({ authToken, message: "Loged in successfully", success: "success" })
+    return res.json({ authToken, user: olduser.user, message: "Loged in successfully", success: "success" })
 
   } catch (error) {
     console.log(error);
-    return res.status(400).json({ message: "some error occured", success: "reject" });
+    return res.status(400).json({ message: "some error occured", success: "fail" });
   }
 })
 
